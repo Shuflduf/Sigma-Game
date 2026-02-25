@@ -1,6 +1,5 @@
 {
 	"nodes":[
-		{"id":"45613693e9ed843b","type":"text","text":"Buckshot Roulette","x":-200,"y":-140,"width":250,"height":60,"color":"1"},
 		{"id":"cb5e38db7eada969","type":"text","text":"Decision Overload","x":223,"y":854,"width":250,"height":60},
 		{"id":"d13c7c4a4392bd89","type":"text","text":"Probability Manipulation","x":587,"y":544,"width":250,"height":60,"color":"4"},
 		{"id":"bf5cfa770d88ae58","type":"text","text":"Decision Points","x":215,"y":540,"width":250,"height":60},
@@ -186,7 +185,8 @@
 		{"id":"0eb419cc90058147","type":"text","text":"No resolution, No glory before death","x":1514,"y":-1174,"width":250,"height":60},
 		{"id":"3f1cd2bc1e1faff0","type":"text","text":"End, Loss: Back to main menu","x":1088,"y":-1200,"width":250,"height":60},
 		{"id":"8e5cc25946d80dab","type":"text","text":"Lots of muted reds, dark greens, browns, greys","x":755,"y":-2033,"width":250,"height":60},
-		{"id":"f53bcac36613c094","type":"text","text":"Color","x":418,"y":-2005,"width":250,"height":60}
+		{"id":"f53bcac36613c094","type":"text","text":"Color","x":418,"y":-2005,"width":250,"height":60},
+		{"id":"45613693e9ed843b","type":"text","text":"# Buckshot Roulette","x":-228,"y":-142,"width":293,"height":55,"color":"1"}
 	],
 	"edges":[
 		{"id":"28082be767d452b2","fromNode":"45613693e9ed843b","fromSide":"bottom","toNode":"7905fd30c90004d9","toSide":"top"},
