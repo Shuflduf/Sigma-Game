@@ -1,0 +1,30 @@
+- chance based
+- invisible lore
+- low skill floor
+- strategy instead of skill
+- ~~if you win, you go to harvard~~
+	- ~~if you lose, you go to harvard as a janitor~~
+- simple
+- the longer the game goes on, the harder it gets
+	- player has to balance short term and long term
+- anime fight game
+- open world
+- keep the fire going
+	- protect from rain
+	- feed fire to make it deadlier and die out faster
+	- hypothermia
+- player vs environment
+	- Risk of Rain
+- horror
+	- hunted
+	- alone
+- unstable
+- rhythm game
+	- as minigames or puzzles
+- fragile
+	- fire
+		- sacred candle
+	- cake
+	- smth else
+	- protect
+- supernatural
