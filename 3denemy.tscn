@@ -1,16 +1,17 @@
 [gd_scene format=3 uid="uid://bwt82m2pxabh2"]
 
+[ext_resource type="Script" uid="uid://mdqmr33vtakh" path="res://scripts/enemy.gd" id="1_jqnyo"]
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_gjsop"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jqnyo"]
 height = 2.1713867
 
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=266886268]
+script = ExtResource("1_jqnyo")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1374834504]
-transform = Transform3D(1, 0, 0, 0, 0.99536437, 0.096175835, 0, -0.096175835, 0.99536437, -0.007342458, 0.14145541, 0.0003888607)
 mesh = SubResource("CapsuleMesh_gjsop")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1710493383]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08569336, 0)
 shape = SubResource("CapsuleShape3D_jqnyo")
