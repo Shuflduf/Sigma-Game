@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://t1od8bjfj3uf"]
 
 [ext_resource type="Script" uid="uid://bk5crhjeltbbs" path="res://player.gd" id="1_4flbx"]
-[ext_resource type="Script" uid="uid://dfht6bvb6ftrq" path="res://player_movement.gd" id="2_onrkg"]
-[ext_resource type="Script" uid="uid://n8jg18xmaay2" path="res://camera_movement.gd" id="3_i3pqv"]
+[ext_resource type="Script" uid="uid://n8jg18xmaay2" path="res://character_controller.gd" id="3_i3pqv"]
+[ext_resource type="Script" uid="uid://ys840unb2a6b" path="res://player_controller.gd" id="4_hqtel"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_sh265"]
 
@@ -20,9 +20,9 @@ mesh = SubResource("CylinderMesh_4flbx")
 [node name="Camera3D" type="Camera3D" parent="." unique_id=959782409]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 
-[node name="PlayerMovement" type="Node" parent="." unique_id=1064745213]
-script = ExtResource("2_onrkg")
-
-[node name="CameraMovement" type="Node" parent="." unique_id=569906274 node_paths=PackedStringArray("cam")]
+[node name="CameraController" type="Node" parent="." unique_id=569906274 node_paths=PackedStringArray("cam")]
 script = ExtResource("3_i3pqv")
 cam = NodePath("../Camera3D")
+
+[node name="PlayerController" type="Node" parent="." unique_id=1385634797]
+script = ExtResource("4_hqtel")
