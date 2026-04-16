@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b2xwav1byneyd"]
+
+[ext_resource type="Script" uid="uid://djs73qxnwgu6f" path="res://projectile.gd" id="1_a85iw"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_akgne"]
+radius = 0.2
+height = 0.4
+
+[node name="Projectile" type="Node3D" unique_id=1374561802]
+script = ExtResource("1_a85iw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2021310937]
+mesh = SubResource("SphereMesh_akgne")
