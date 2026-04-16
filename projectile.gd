@@ -1,6 +1,7 @@
-extends Node3D
-
+extends RigidBody3D
 
 
 func _physics_process(delta: float) -> void:
-	translate(global_transform.basis.z * delta * 10)
+	#print(linear_velocity)
+	if not linear_velocity.is_zero_approx():
+		linear_velocity = linear_velocity.normalized() * 10.0

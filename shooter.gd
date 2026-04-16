@@ -1,6 +1,8 @@
 extends Node3D
-@export var projectile: PackedScene
 
+const Y_COMPENSATION = 0.7
+
+@export var projectile: PackedScene
 
 func _unhandled_input(event: InputEvent) -> void:
 	#if event is InputEventMouseMotion:
@@ -10,11 +12,12 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func shoot():
 	var mouse_pos = get_mouse_pos()
-	var angle = atan2(mouse_pos.x, mouse_pos.y)
-	var new_proj = projectile.instantiate()
+	var angle = atan2(-mouse_pos.x, -mouse_pos.y * Y_COMPENSATION)
+	var new_proj: RigidBody3D = projectile.instantiate()
 	get_tree().root.add_child(new_proj)
 	new_proj.global_position = global_position
-	new_proj.rotation.y = angle / 2
+	#new_proj.rotation.y = angle / 2
+	new_proj.apply_impulse(Vector3.FORWARD.rotated(Vector3.UP, angle) * 10.0)
 	print(angle)
 	DebugDraw2D.set_text("angle", angle)
 
