@@ -2,23 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://t1od8bjfj3uf" path="res://player.tscn" id="2_tlwt5"]
 
-[sub_resource type="Sky" id="Sky_cyberpunk"]
-sky_material =SubResource("StandardMaterial3D_sky")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sky"]
-albedo_color = Color(0.05, 0.02, 0.12, 1.0)
-
-[sub_resource type="Environment" id="Environment_cyberpunk"]
-background_mode = 1
-background_color = Color(0.05, 0.02, 0.12, 1.0)
-tonemap_mode = 2
-glow_enabled = true
-glow_intensity = 2.0
-glow_blend_mode = 0
-ambient_light_source = 1
-ambient_light_color = Color(0.3, 0.1, 0.5, 1.0)
-ambient_light_energy = 0.8
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dark_floor"]
 albedo_color = Color(0.08, 0.08, 0.15, 1.0)
 uv1_triplanar = true
@@ -40,6 +23,17 @@ albedo_color = Color(0.7, 0.0, 1.0, 1.0)
 emission_enabled = true
 emission = Color(0.8, 0.0, 1.0, 1.0)
 emission_energy_multiplier = 2.5
+
+[sub_resource type="Environment" id="Environment_cyberpunk"]
+background_mode = 1
+background_color = Color(0.05, 0.02, 0.12, 1.0)
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 2.0
+glow_blend_mode = 0
+ambient_light_source = 1
+ambient_light_color = Color(0.3, 0.1, 0.5, 1.0)
+ambient_light_energy = 0.8
 
 [node name="World" type="Node3D" unique_id=451388444]
 
