@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://baa4a4ay70qte" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://b2xwav1byneyd" path="res://projectile.tscn" id="2_i3pqv"]
 [ext_resource type="Script" uid="uid://b2i202xhvhk31" path="res://shooter.gd" id="2_onrkg"]
-[ext_resource type="Script" uid="uid://ukn685hprn62" path="res://light.gd" id="4_hqtel"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_f3sb7"]
 
@@ -21,14 +20,15 @@ shape = SubResource("CylinderShape3D_f3sb7")
 mesh = SubResource("CylinderMesh_fj7yv")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=948609985]
-transform = Transform3D(1, 0, 0, 0, 0.36474672, 0.9311068, 0, -0.9311068, 0.36474672, 0, 4.7149158, 2.2443385)
+transform = Transform3D(1, 0, 0, 0, 0.36474672, 0.9311068, 0, -0.9311068, 0.36474672, 0, 15.489027, 5.8139358)
+fov = 30.0
+size = 8.089
 
 [node name="Shooter" type="Node3D" parent="." unique_id=248082245]
 script = ExtResource("2_onrkg")
 projectile = ExtResource("2_i3pqv")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=981902406]
-script = ExtResource("4_hqtel")
-
-[node name="SpotLight3D" type="SpotLight3D" parent="SpotLight3D" unique_id=1445235201]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=135140224]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+light_energy = 0.5
+omni_range = 3.0
