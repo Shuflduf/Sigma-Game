@@ -1,78 +1,356 @@
 [gd_scene format=3 uid="uid://ddb8dmd1mvsbo"]
 
 [ext_resource type="PackedScene" uid="uid://t1od8bjfj3uf" path="res://player.tscn" id="2_tlwt5"]
+[ext_resource type="Script" uid="uid://b0s3v6r10v3p" path="res://light.gd" id="1_light"]
+[ext_resource type="Script" uid="uid://c0vf1x3q" path="res://flickering_light.gd" id="1_flicker"]
+[ext_resource type="Script" uid="uid://c0a6b7x8" path="res://moving_platform.gd" id="1_moving"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dark_floor"]
-albedo_color = Color(0.08, 0.08, 0.15, 1.0)
+albedo_color = Color(0.05, 0.05, 0.1, 1.0)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dark_metal"]
+albedo_color = Color(0.06, 0.06, 0.12, 1.0)
 uv1_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_neon_cyan"]
 albedo_color = Color(0.0, 0.8, 1.0, 1.0)
 emission_enabled = true
 emission = Color(0.0, 1.0, 1.0, 1.0)
-emission_energy_multiplier = 3.0
+emission_energy_multiplier = 3.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_neon_magenta"]
 albedo_color = Color(1.0, 0.0, 1.0, 1.0)
 emission_enabled = true
 emission = Color(1.0, 0.0, 1.0, 1.0)
-emission_energy_multiplier = 3.0
+emission_energy_multiplier = 3.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_neon_purple"]
-albedo_color = Color(0.7, 0.0, 1.0, 1.0)
+albedo_color = Color(0.8, 0.0, 1.0, 1.0)
 emission_enabled = true
-emission = Color(0.8, 0.0, 1.0, 1.0)
+emission = Color(0.9, 0.0, 1.0, 1.0)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_neon_pink"]
+albedo_color = Color(1.0, 0.2, 0.8, 1.0)
+emission_enabled = true
+emission = Color(1.0, 0.3, 0.8, 1.0)
 emission_energy_multiplier = 2.5
 
 [sub_resource type="Environment" id="Environment_cyberpunk"]
 background_mode = 1
-background_color = Color(0.05, 0.02, 0.12, 1.0)
+background_color = Color(0.02, 0.01, 0.08, 1.0)
 tonemap_mode = 2
 glow_enabled = true
-glow_intensity = 2.0
+glow_intensity = 3.5
 glow_blend_mode = 0
 ambient_light_source = 1
-ambient_light_color = Color(0.3, 0.1, 0.5, 1.0)
-ambient_light_energy = 0.8
+ambient_light_color = Color(0.15, 0.05, 0.25, 1.0)
+ambient_light_energy = 0.6
+ssao_enabled = true
 
 [node name="World" type="Node3D" unique_id=451388444]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1128390191]
 environment = SubResource("Environment_cyberpunk")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=77144076]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1987654321]
+transform = Transform3D(0.707, -0.5, 0.5, 0, 0.707, 0.707, -0.707, -0.5, 0.5, 0, 30, 0)
+light_color = Color(0.4, 0.3, 0.6, 1.0)
+light_energy = 0.4
+shadow_enabled = true
+
+[node name="GroundFloor" type="CSGBox3D" parent="." unique_id=77144076]
 use_collision = true
 collision_mask = 0
-size = Vector3(1000, 1, 1000)
+size = Vector3(2000, 1, 2000)
 material = SubResource("StandardMaterial3D_dark_floor")
 
 [node name="Player" parent="." unique_id=1321716191 instance=ExtResource("2_tlwt5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=698613044]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3, 0)
+[node name="CentralTower" type="CSGBox3D" parent="." unique_id=1111111110]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.5, 0)
 use_collision = true
 collision_mask = 0
-size = Vector3(1, 5, 6)
-material = SubResource("StandardMaterial3D_neon_cyan")
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1043990960]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, 0)
-use_collision = true
-collision_mask = 0
-size = Vector3(1, 5, 6)
+size = Vector3(3, 15, 3)
 material = SubResource("StandardMaterial3D_neon_magenta")
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=787508369]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, 3.5)
+[node name="TowerTop" type="CSGBox3D" parent="CentralTower" unique_id=1111111111]
+transform = Transform3D(1.2, 0, 0, 0, 1, 0, 0, 0, 1.2, 0, 8.5, 0)
+use_collision = false
+size = Vector3(3, 1.5, 3)
+material = SubResource("StandardMaterial3D_neon_cyan")
+operation = 2
+
+[node name="LeftTower" type="CSGBox3D" parent="." unique_id=2222222220]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 4.5, -5)
 use_collision = true
 collision_mask = 0
-size = Vector3(5, 5, 1)
+size = Vector3(2, 9, 2)
+material = SubResource("StandardMaterial3D_neon_cyan")
+
+[node name="LeftTowerAccent" type="CSGBox3D" parent="LeftTower" unique_id=2222222221]
+transform = Transform3D(1.3, 0, 0, 0, 1, 0, 0, 0, 1.3, 0, 5, 0)
+use_collision = false
+size = Vector3(0.5, 1, 0.5)
+material = SubResource("StandardMaterial3D_neon_purple")
+operation = 2
+
+[node name="RightTower" type="CSGBox3D" parent="." unique_id=3333333330]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 4.5, 5)
+use_collision = true
+collision_mask = 0
+size = Vector3(2, 9, 2)
 material = SubResource("StandardMaterial3D_neon_purple")
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=2028330343]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, -8.5)
+[node name="RightTowerAccent" type="CSGBox3D" parent="RightTower" unique_id=3333333331]
+transform = Transform3D(1.3, 0, 0, 0, 1, 0, 0, 0, 1.3, 0, 5, 0)
+use_collision = false
+size = Vector3(0.5, 1, 0.5)
+material = SubResource("StandardMaterial3D_neon_cyan")
+operation = 2
+
+[node name="BridgeLeft" type="CSGBox3D" parent="." unique_id=4444444440]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.5, -2)
 use_collision = true
 collision_mask = 0
-size = Vector3(21, 5, 1)
+size = Vector3(4, 0.5, 1.5)
 material = SubResource("StandardMaterial3D_neon_cyan")
+
+[node name="BridgeRight" type="CSGBox3D" parent="." unique_id=5555555550]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.5, 2)
+use_collision = true
+collision_mask = 0
+size = Vector3(4, 0.5, 1.5)
+material = SubResource("StandardMaterial3D_neon_magenta")
+
+[node name="LowerLevel" type="CSGBox3D" parent="." unique_id=6666666660]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+use_collision = true
+collision_mask = 0
+size = Vector3(15, 1, 15)
+material = SubResource("StandardMaterial3D_dark_metal")
+
+[node name="LeftPlatform" type="CSGBox3D" parent="." unique_id=7777777770]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, -10)
+use_collision = true
+collision_mask = 0
+size = Vector3(3, 0.5, 4)
+material = SubResource("StandardMaterial3D_neon_purple")
+
+[node name="RightPlatform" type="CSGBox3D" parent="." unique_id=8888888880]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 10)
+use_collision = true
+collision_mask = 0
+size = Vector3(3, 0.5, 4)
+material = SubResource("StandardMaterial3D_neon_magenta")
+
+[node name="DetailStrip1" type="CSGBox3D" parent="." unique_id=9999999990]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.5, 0)
+use_collision = true
+collision_mask = 0
+size = Vector3(0.3, 4, 0.3)
+material = SubResource("StandardMaterial3D_neon_cyan")
+
+[node name="DetailStrip2" type="CSGBox3D" parent="." unique_id=10000000000]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 2.5, 3)
+use_collision = true
+collision_mask = 0
+size = Vector3(0.2, 3, 0.2)
+material = SubResource("StandardMaterial3D_neon_pink")
+
+[node name="DetailStrip3" type="CSGBox3D" parent="." unique_id=10000000001]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 2.5, -3)
+use_collision = true
+collision_mask = 0
+size = Vector3(0.2, 3, 0.2)
+material = SubResource("StandardMaterial3D_neon_cyan")
+
+[node name="SignPost1" type="CSGBox3D" parent="." unique_id=10000000002]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 4, 5)
+use_collision = true
+collision_mask = 0
+size = Vector3(2.5, 0.2, 0.2)
+material = SubResource("StandardMaterial3D_neon_magenta")
+
+[node name="SignPost2" type="CSGBox3D" parent="." unique_id=10000000003]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 4, -5)
+use_collision = true
+collision_mask = 0
+size = Vector3(2.5, 0.2, 0.2)
+material = SubResource("StandardMaterial3D_neon_purple")
+
+[node name="UpperStructure" type="CSGBox3D" parent="." unique_id=10000000004]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 12, -15)
+use_collision = true
+collision_mask = 0
+size = Vector3(1.5, 5, 1.5)
+material = SubResource("StandardMaterial3D_neon_cyan")
+
+[node name="UpperStructure2" type="CSGBox3D" parent="." unique_id=10000000005]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 12, 15)
+use_collision = true
+collision_mask = 0
+size = Vector3(1.5, 5, 1.5)
+material = SubResource("StandardMaterial3D_neon_magenta")
+
+[node name="DecorativeRail1" type="CSGBox3D" parent="." unique_id=10000000014]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3.8, 15)
+use_collision = true
+collision_mask = 0
+size = Vector3(8, 0.3, 0.2)
+material = SubResource("StandardMaterial3D_neon_cyan")
+
+[node name="DecorativeRail2" type="CSGBox3D" parent="." unique_id=10000000015]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3.8, -15)
+use_collision = true
+collision_mask = 0
+size = Vector3(8, 0.3, 0.2)
+material = SubResource("StandardMaterial3D_neon_magenta")
+
+[node name="VerticalCable1" type="CSGBox3D" parent="." unique_id=10000000016]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 5, 10)
+use_collision = true
+collision_mask = 0
+size = Vector3(0.15, 8, 0.15)
+material = SubResource("StandardMaterial3D_neon_pink")
+
+[node name="VerticalCable2" type="CSGBox3D" parent="." unique_id=10000000017]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 5, -10)
+use_collision = true
+collision_mask = 0
+size = Vector3(0.15, 8, 0.15)
+material = SubResource("StandardMaterial3D_neon_purple")
+
+[node name="SmallPlatform1" type="CSGBox3D" parent="." unique_id=10000000018]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 3, 0)
+use_collision = true
+collision_mask = 0
+size = Vector3(1.5, 0.3, 1.5)
+material = SubResource("StandardMaterial3D_neon_magenta")
+
+[node name="SmallPlatform2" type="CSGBox3D" parent="." unique_id=10000000019]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, 0)
+use_collision = true
+collision_mask = 0
+size = Vector3(1.5, 0.3, 1.5)
+material = SubResource("StandardMaterial3D_neon_cyan")
+
+[node name="ArcStructure1" type="CSGBox3D" parent="." unique_id=10000000020]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -20)
+use_collision = true
+collision_mask = 0
+size = Vector3(12, 0.4, 0.4)
+material = SubResource("StandardMaterial3D_neon_purple")
+
+[node name="ArcStructure2" type="CSGBox3D" parent="." unique_id=10000000021]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 20)
+use_collision = true
+collision_mask = 0
+size = Vector3(12, 0.4, 0.4)
+material = SubResource("StandardMaterial3D_neon_magenta")
+
+[node name="HangingStructure" type="CSGBox3D" parent="." unique_id=10000000022]
+transform = Transform3D(0.3, 0, 0, 0, 1, 0, 0, 0, 0.3, -20, 8, 20)
+use_collision = false
+collision_mask = 0
+size = Vector3(1, 2, 1)
+material = SubResource("StandardMaterial3D_neon_cyan")
+
+[node name="HangingStructure2" type="CSGBox3D" parent="." unique_id=10000000023]
+transform = Transform3D(0.3, 0, 0, 0, 1, 0, 0, 0, 0.3, 20, 8, -20)
+use_collision = false
+collision_mask = 0
+size = Vector3(1, 2, 1)
+material = SubResource("StandardMaterial3D_neon_magenta")
+
+[node name="Lights" type="Node3D" parent="." unique_id=10000000006]
+
+[node name="SpotLight_Main" type="SpotLight3D" parent="Lights" unique_id=10000000007]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
+light_color = Color(0.0, 1.0, 0.8, 1.0)
+light_energy = 3.0
+spot_range = 30.0
+spot_angle = 30.0
+
+[node name="SpotLight_Left" type="SpotLight3D" parent="Lights" unique_id=10000000008]
+transform = Transform3D(0.707, -0.5, -0.5, 0, 0.707, -0.707, 0.707, 0.5, 0.5, -10, 8, -8)
+light_color = Color(1.0, 0.0, 1.0, 1.0)
+light_energy = 2.5
+spot_range = 25.0
+spot_angle = 35.0
+
+[node name="SpotLight_Right" type="SpotLight3D" parent="Lights" unique_id=10000000009]
+transform = Transform3D(0.707, -0.5, 0.5, 0, 0.707, 0.707, -0.707, -0.5, 0.5, 10, 8, 8)
+light_color = Color(1.0, 0.2, 0.8, 1.0)
+light_energy = 2.5
+spot_range = 25.0
+spot_angle = 35.0
+
+[node name="OmniLight_LeftTower" type="OmniLight3D" parent="Lights" unique_id=10000000010]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 10, -5)
+light_color = Color(0.0, 1.0, 0.8, 1.0)
+light_energy = 1.5
+omni_range = 8.0
+
+[node name="OmniLight_RightTower" type="OmniLight3D" parent="Lights" unique_id=10000000011]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 10, 5)
+light_color = Color(1.0, 0.0, 1.0, 1.0)
+light_energy = 1.5
+omni_range = 8.0
+
+[node name="OmniLight_Center" type="OmniLight3D" parent="Lights" unique_id=10000000012]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -10)
+light_color = Color(0.8, 0.0, 1.0, 1.0)
+light_energy = 1.2
+omni_range = 7.0
+
+[node name="RotatingLight1" type="SpotLight3D" parent="Lights" unique_id=10000000013]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 6, 0)
+light_color = Color(0.0, 1.0, 0.8, 1.0)
+light_energy = 2.0
+spot_range = 20.0
+spot_angle = 40.0
+script = ExtResource("1_light")
+
+[node name="FlickeringLights" type="Node3D" parent="." unique_id=10000000024]
+
+[node name="FlickerLight1" type="OmniLight3D" parent="FlickeringLights" unique_id=10000000025]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 8, -10)
+light_color = Color(0.0, 1.0, 0.8, 1.0)
+light_energy = 0.8
+omni_range = 5.0
+script = ExtResource("1_flicker")
+
+[node name="FlickerLight2" type="OmniLight3D" parent="FlickeringLights" unique_id=10000000026]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 8, 10)
+light_color = Color(1.0, 0.0, 1.0, 1.0)
+light_energy = 0.8
+omni_range = 5.0
+script = ExtResource("1_flicker")
+
+[node name="FlickerLight3" type="OmniLight3D" parent="FlickeringLights" unique_id=10000000027]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 5, 5)
+light_color = Color(1.0, 0.2, 0.8, 1.0)
+light_energy = 0.7
+omni_range = 4.0
+script = ExtResource("1_flicker")
+
+[node name="AnimatedPlatforms" type="Node3D" parent="." unique_id=10000000028]
+
+[node name="MovingPlatform1" type="CSGBox3D" parent="AnimatedPlatforms" unique_id=10000000029]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -25)
+use_collision = true
+collision_mask = 0
+size = Vector3(2, 0.3, 2)
+material = SubResource("StandardMaterial3D_neon_cyan")
+script = ExtResource("1_moving")
+
+[node name="MovingPlatform2" type="CSGBox3D" parent="AnimatedPlatforms" unique_id=10000000030]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 25)
+use_collision = true
+collision_mask = 0
+size = Vector3(2, 0.3, 2)
+material = SubResource("StandardMaterial3D_neon_magenta")
+script = ExtResource("1_moving")
