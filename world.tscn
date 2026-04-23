@@ -1,32 +1,56 @@
 [gd_scene format=3 uid="uid://ddb8dmd1mvsbo"]
 
-[ext_resource type="Texture2D" uid="uid://dx8b2rtss61b8" path="res://Assets/Proto/Dark/texture_08.png" id="1_f3sb7"]
 [ext_resource type="PackedScene" uid="uid://t1od8bjfj3uf" path="res://player.tscn" id="2_tlwt5"]
-[ext_resource type="Texture2D" uid="uid://campp5densjrw" path="res://Assets/Proto/Orange/texture_01.png" id="3_tlwt5"]
 
-[sub_resource type="Environment" id="Environment_tlwt5"]
-background_mode = 2
+[sub_resource type="Sky" id="Sky_cyberpunk"]
+sky_material =SubResource("StandardMaterial3D_sky")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sky"]
+albedo_color = Color(0.05, 0.02, 0.12, 1.0)
+
+[sub_resource type="Environment" id="Environment_cyberpunk"]
+background_mode = 1
+background_color = Color(0.05, 0.02, 0.12, 1.0)
 tonemap_mode = 2
 glow_enabled = true
+glow_intensity = 2.0
+glow_blend_mode = 0
+ambient_light_source = 1
+ambient_light_color = Color(0.3, 0.1, 0.5, 1.0)
+ambient_light_energy = 0.8
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fj7yv"]
-albedo_texture = ExtResource("1_f3sb7")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dark_floor"]
+albedo_color = Color(0.08, 0.08, 0.15, 1.0)
 uv1_triplanar = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aqk2v"]
-albedo_texture = ExtResource("3_tlwt5")
-uv1_triplanar = true
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_neon_cyan"]
+albedo_color = Color(0.0, 0.8, 1.0, 1.0)
+emission_enabled = true
+emission = Color(0.0, 1.0, 1.0, 1.0)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_neon_magenta"]
+albedo_color = Color(1.0, 0.0, 1.0, 1.0)
+emission_enabled = true
+emission = Color(1.0, 0.0, 1.0, 1.0)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_neon_purple"]
+albedo_color = Color(0.7, 0.0, 1.0, 1.0)
+emission_enabled = true
+emission = Color(0.8, 0.0, 1.0, 1.0)
+emission_energy_multiplier = 2.5
 
 [node name="World" type="Node3D" unique_id=451388444]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1128390191]
-environment = SubResource("Environment_tlwt5")
+environment = SubResource("Environment_cyberpunk")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=77144076]
 use_collision = true
 collision_mask = 0
 size = Vector3(1000, 1, 1000)
-material = SubResource("StandardMaterial3D_fj7yv")
+material = SubResource("StandardMaterial3D_dark_floor")
 
 [node name="Player" parent="." unique_id=1321716191 instance=ExtResource("2_tlwt5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
@@ -36,25 +60,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3, 0)
 use_collision = true
 collision_mask = 0
 size = Vector3(1, 5, 6)
-material = SubResource("StandardMaterial3D_aqk2v")
+material = SubResource("StandardMaterial3D_neon_cyan")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1043990960]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, 0)
 use_collision = true
 collision_mask = 0
 size = Vector3(1, 5, 6)
-material = SubResource("StandardMaterial3D_aqk2v")
+material = SubResource("StandardMaterial3D_neon_magenta")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=787508369]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, 3.5)
 use_collision = true
 collision_mask = 0
 size = Vector3(5, 5, 1)
-material = SubResource("StandardMaterial3D_aqk2v")
+material = SubResource("StandardMaterial3D_neon_purple")
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=2028330343]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, -8.5)
 use_collision = true
 collision_mask = 0
 size = Vector3(21, 5, 1)
-material = SubResource("StandardMaterial3D_aqk2v")
+material = SubResource("StandardMaterial3D_neon_cyan")
