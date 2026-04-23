@@ -55,30 +55,29 @@ emission = Color(0.4, 0.6, 1.0, 1.0)
 emission_energy_multiplier = 0.5
 
 [sub_resource type="StandardMaterial3D" id="MatDarkSmoke"]
-albedo_color = Color(0.02, 0.02, 0.03, 0.3)
-transparency = 2
-cull_mode = 2
+albedo_color = Color(0.02, 0.02, 0.03, 0.2)
+transparency = 1
 
 [sub_resource type="Environment" id="EnvCyberpunk"]
 background_mode = 1
-background_color = Color(0.01, 0.005, 0.02, 1.0)
+background_color = Color(0.02, 0.01, 0.04, 1.0)
 tonemap_mode = 2
 glow_enabled = true
-glow_intensity = 2.2
+glow_intensity = 2.5
 glow_blend_mode = 0
-glow_hdr_threshold = 0.5
-glow_hdr_scale = 1.0
+glow_hdr_threshold = 0.4
+glow_hdr_scale = 1.2
 ambient_light_source = 1
-ambient_light_color = Color(0.06, 0.02, 0.1, 1.0)
-ambient_light_energy = 0.3
-ambient_light_sky_contribution = 0.2
+ambient_light_color = Color(0.1, 0.05, 0.15, 1.0)
+ambient_light_energy = 0.6
+ambient_light_sky_contribution = 0.4
 ssao_enabled = true
-ssao_radius = 1.0
-ssao_intensity = 1.2
+ssao_radius = 1.5
+ssao_intensity = 1.5
 adjustment_enabled = true
-adjustment_brightness = 1.0
-adjustment_contrast = 1.2
-adjustment_saturation = 0.9
+adjustment_brightness = 1.1
+adjustment_contrast = 1.3
+adjustment_saturation = 0.85
 
 [node name="World" type="Node3D"]
 
@@ -90,6 +89,13 @@ transform = Transform3D(0.707, -0.5, 0.5, 0, 0.707, 0.707, -0.707, -0.5, 0.5, 0,
 light_color = Color(0.15, 0.08, 0.2, 1.0)
 light_energy = 0.15
 shadow_enabled = true
+
+[node name="PlayerSpotlight" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 10)
+light_color = Color(0.2, 0.8, 1.0, 1.0)
+light_energy = 2.0
+spot_range = 50.0
+spot_angle = 70.0
 
 [node name="Ground" type="CSGBox3D" parent="."]
 use_collision = true
@@ -753,3 +759,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 35, 0)
 light_color = Color(0.0, 1.0, 0.8, 1.0)
 light_energy = 0.6
 omni_range = 60.0
+
+[node name="CustomLights" type="Node3D" parent="Lights"]
+
+[node name="CustomSpot1" type="SpotLight3D" parent="Lights/CustomLights"]
+transform = Transform3D(0, 0.707, 0.707, 1, 0, 0, 0, 0.707, -0.707, 20, 25, 30)
+light_color = Color(0.0, 1.0, 1.0, 1.0)
+light_energy = 0.8
+spot_range = 35.0
+spot_angle = 50.0
+
+[node name="CustomSpot2" type="SpotLight3D" parent="Lights/CustomLights"]
+transform = Transform3D(0, -0.707, 0.707, 1, 0, 0, 0, 0.707, 0.707, -25, 22, -25)
+light_color = Color(1.0, 0.0, 0.9, 1.0)
+light_energy = 0.75
+spot_range = 30.0
+spot_angle = 45.0
