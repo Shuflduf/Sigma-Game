@@ -8,12 +8,6 @@
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_fj7yv"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_player"]
-albedo_color = Color(0.2, 1.0, 0.9, 1.0)
-emission_enabled = true
-emission = Color(0.2, 0.8, 1.0, 1.0)
-emission_energy_multiplier = 2.0
-
 [node name="Player" type="CharacterBody3D" unique_id=1321716191]
 collision_layer = 2
 axis_lock_linear_y = true
@@ -24,7 +18,6 @@ shape = SubResource("CylinderShape3D_f3sb7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=517745308]
 mesh = SubResource("CylinderMesh_fj7yv")
-material_override = SubResource("StandardMaterial3D_player")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=948609985]
 transform = Transform3D(1, 0, 0, 0, 0.36474672, 0.9311068, 0, -0.9311068, 0.36474672, 0, 15.489027, 5.8139358)
@@ -37,6 +30,5 @@ projectile = ExtResource("2_i3pqv")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=135140224]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-light_color = Color(0.2, 1.0, 0.9, 1.0)
-light_energy = 1.0
-omni_range = 4.0
+light_energy = 0.5
+omni_range = 3.0
