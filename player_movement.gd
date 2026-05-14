@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends Node
 
 @warning_ignore("unused_signal")
 signal jumped
@@ -15,32 +15,33 @@ var wish_jump = false
 var wish_dir = Vector3.ZERO
 var jump_enabled = true
 
+@onready var player: CharacterBody3D = $".."
 
 func _physics_process(delta: float) -> void:
 	_process_movement(delta)
 
-	move_and_slide()
+	player.move_and_slide()
 
 
 func _process_movement(delta: float):
-	if is_on_floor():
+	if player.is_on_floor():
 		if wish_jump:
-			velocity.y = JUMP_IMPULSE
-			velocity = update_velocity_air(delta)
+			player.velocity.y = JUMP_IMPULSE
+			player.velocity = update_velocity_air(delta)
 			wish_jump = false
 		else:
-			velocity = update_velocity_ground(delta)
+			player.velocity = update_velocity_ground(delta)
 	else:
-		velocity += get_gravity() * delta
-		velocity = update_velocity_air(delta)
+		player.velocity += player.get_gravity() * delta
+		player.velocity = update_velocity_air(delta)
 
 
 func update_velocity_ground(delta: float) -> Vector3:
-	var speed = velocity.length()
+	var speed = player.velocity.length()
 	if !is_zero_approx(speed):
 		var control = max(STOP_SPEED, speed)
 		var drop = control * FRICTION * delta
-		velocity *= max(speed - drop, 0) / speed
+		player.velocity *= max(speed - drop, 0) / speed
 
 	return accelerate(MAX_VELOCITY_GROUND, delta)
 
@@ -50,7 +51,7 @@ func update_velocity_air(delta: float) -> Vector3:
 
 
 func accelerate(max_velocity: float, delta: float) -> Vector3:
-	var current_speed = velocity.dot(wish_dir)
+	var current_speed = player.velocity.dot(wish_dir)
 	var add_speed = clamp(max_velocity - current_speed, 0, MAX_ACCELERATION * delta)
 
-	return velocity + add_speed * wish_dir
+	return player.velocity + add_speed * wish_dir

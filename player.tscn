@@ -1,34 +1,28 @@
-[gd_scene format=3 uid="uid://t1od8bjfj3uf"]
+[gd_scene format=3 uid="uid://dkji0li3wasqq"]
 
-[ext_resource type="Script" uid="uid://baa4a4ay70qte" path="res://player.gd" id="1_4flbx"]
-[ext_resource type="PackedScene" uid="uid://b2xwav1byneyd" path="res://projectile.tscn" id="2_i3pqv"]
-[ext_resource type="Script" uid="uid://b2i202xhvhk31" path="res://shooter.gd" id="2_onrkg"]
+[ext_resource type="Script" uid="uid://bk5crhjeltbbs" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://n8jg18xmaay2" path="res://character_controller.gd" id="3_i3pqv"]
+[ext_resource type="Script" uid="uid://ys840unb2a6b" path="res://player_controller.gd" id="4_hqtel"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_f3sb7"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sh265"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_fj7yv"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_4flbx"]
 
-[node name="Player" type="CharacterBody3D" unique_id=1321716191]
-collision_layer = 2
-axis_lock_linear_y = true
+[node name="Player" type="CharacterBody3D" unique_id=413689187]
 script = ExtResource("1_4flbx")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1005428765]
-shape = SubResource("CylinderShape3D_f3sb7")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=311282117]
+shape = SubResource("CylinderShape3D_sh265")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=517745308]
-mesh = SubResource("CylinderMesh_fj7yv")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1118815178]
+mesh = SubResource("CylinderMesh_4flbx")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=948609985]
-transform = Transform3D(1, 0, 0, 0, 0.36474672, 0.9311068, 0, -0.9311068, 0.36474672, 0, 15.489027, 5.8139358)
-fov = 30.0
-size = 8.089
+[node name="Camera3D" type="Camera3D" parent="." unique_id=959782409]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 
-[node name="Shooter" type="Node3D" parent="." unique_id=248082245]
-script = ExtResource("2_onrkg")
-projectile = ExtResource("2_i3pqv")
+[node name="CameraController" type="Node" parent="." unique_id=569906274 node_paths=PackedStringArray("cam")]
+script = ExtResource("3_i3pqv")
+cam = NodePath("../Camera3D")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=135140224]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-light_energy = 0.5
-omni_range = 3.0
+[node name="PlayerController" type="Node" parent="." unique_id=1385634797]
+script = ExtResource("4_hqtel")
